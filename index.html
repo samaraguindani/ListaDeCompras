@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="shortcut icon" href="carrinho-de-compras.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="container__input">
+                <div class="container__titulo">
+                    <img src="carrinho-de-compras.png" alt="imagem de carrinho de compras" class="imagem-carrinho">
+                    <h1 class="lista-titulos">LISTA DE COMPRAS</h1>
+                </div>
+                
+                <div class="container__aux">
+                    <p class="inserir-comida">Insira o item abaixo</p>
+                    <input type="text" class="input-comida" id="input-comida" value="insira seu alimento aqui" onfocus="this.value='';" />
+            
+                    <select name="categoria" id="categoria">
+                        <option class="categoria-item" value="frutas">frutas</option>
+                        <option class="categoria-item" value="laticinios">laticinios</option>
+                        <option class="categoria-item" value="congelados">congelados</option>
+                        <option class="categoria-item" value="doces">doces</option>
+                        <option class="categoria-item" value="bebidas">bebidas</option>
+                    </select>
+
+                    <div class="container__botoes">
+                        <button class="botao-style" id="botao-add">Adicionar</button>
+                        <button class="botao-style" id="botao-remove">Remover</button>
+
+                        <div class="botao__limpa-tudo">
+                            <button class="botao-style" id="botao-limpa">Remover tudo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container__lista">
+                <p class="lista-titulo">Lista de compras:</p>
+                <p class="lista-compra">Sua lista está vazia!</p>
+            </div>
+        </div> 
+    </section>
+
+    <script src="main.js" defer></script>
+
+</body>
+</html>
