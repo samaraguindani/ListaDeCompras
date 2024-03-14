@@ -1,0 +1,92 @@
+:root{
+    --font-open: "Open Sans", sans-serif;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.container__titulo{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.container__input,
+.container__lista,
+.container__categorias{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao-style,
+.container__lista,
+#categoria,
+.input-comida,
+.lista__titulo{
+    font-family: var(--font-open);
+    font-weight: 400;
+    font-size: 15px;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.container__titulo{
+    margin: 20px;
+}
+
+.titulo{
+    font-family: var(--font-open);
+    font-weight: 500;
+    font-size: 20px;
+    color: black;
+    margin-left: 20px;
+}
+
+img{
+    width: 50px;
+    height: 50px;
+}
+
+.container{
+    margin-left: 30px;
+}
+
+.container__input,
+.container__lista{
+    align-items: flex-start;
+}
+
+.botao-style,
+.input-comida,
+#categoria{
+    border-radius: 3px;
+    background-color: transparent;
+    padding: 0 10px;
+    border: 2px solid pink;
+    height: 26px;
+    transition: 0.5s;
+}
+
+.botao-style:hover,
+.botao-style:focus,
+.input-comida:hover,
+.input-comida:focus,
+#categoria:hover
+#categoria:focus{
+    border-color: palevioletred;
+    background-color: rgb(255, 248, 250);
+}
+
+.container__lista{
+    padding-left: 30px;
+}
+
+
+
