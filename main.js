@@ -17,40 +17,49 @@ let alimentosPorCategoria = {
     bebidas: []
 };
 
-// window.onload(() => {
+exibirListaCompra();
 
-// });
+botaoAdd.addEventListener('click', () => {
+    if(naoRepetirAlimento()){
+        alert(`O alimento ${alimento} ja foi adicionado em ${categoria}`);
+    }else{
+        adicionarAlimento();
+    }    
+});
 
-botaoAdicionar();
-botaoRemover();
-botaoLimparTudo();
+botaoRemove.addEventListener('click', excluirAlimento);
 
-function botaoAdicionar() {
-    botaoAdd.onclick = function(){
-        if(naoRepetirAlimento()){
-            alert(`O alimento ${alimento} ja foi adicionado em ${categoria}`);
-        }else{
-            adicionarAlimento();
-        }        
-    }
-}
-
-function botaoRemover() {
-    botaoRemove.onclick = function () {
-        excluirAlimento();
-    }
-}
-
-function botaoLimparTudo() {
-    botaoLimpa.onclick = function () {
-        excluirTudo();
-    }
-}
+botaoLimpa.addEventListener('click', excluirTudo);
 
 function receberAlimentoECategoria() {
     alimento = alimentoAdicionado.value.toLowerCase();
     categoria = categoriaSelecionada.value;
 }
+
+function getListaDeCompras() {
+    return JSON.parse(localStorage.getItem('listaDeCompras')) || [];
+}
+
+function saveToLocalStorage(alimentosPorCategoria) {
+    const lista = getListaDeCompras() || []; // Obter a lista atual do LocalStorage ou uma lista vazia se não existir
+    const index = lista.findIndex(item => isEqual(item, alimentosPorCategoria)); // Verificar se já existe uma entrada com os mesmos dados
+
+    if (index !== -1) { // Se já existir, atualize os dados
+        lista[index] = alimentosPorCategoria;
+    } else { // Caso contrário, adicione à lista
+        lista.push(alimentosPorCategoria);
+    }
+
+    localStorage.setItem('listaDeCompras', JSON.stringify(lista)); // Salvar a lista atualizada no LocalStorage
+    console.log(lista);
+}
+
+
+// Função auxiliar para verificar igualdade entre objetos
+function isEqual(obj1, obj2) {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
+}
+
 
 function adicionarAlimento() {
     receberAlimentoECategoria();
@@ -78,6 +87,7 @@ function adicionarAlimento() {
                 alert("Categoria inválida!");
         }
         listaCompra.innerHTML = formatarListaCompra(alimentosPorCategoria);
+        saveToLocalStorage(alimentosPorCategoria);
     }
 }
 
@@ -138,22 +148,24 @@ function excluirTudo() {
 }
 
 function formatarListaCompra(alimentosPorCategoria) {
+
     let listaFormatada = "";
-    listaFormatada += "Frutas:<br>";
-    listaFormatada += alimentosPorCategoria.frutas.join(", ");
+    listaFormatada += "Frutas:<br> - ";
+    listaFormatada += alimentosPorCategoria.frutas.join("<br> - ");
     listaFormatada += "<br><br>";
-    listaFormatada += "Laticínios:<br>";
-    listaFormatada += alimentosPorCategoria.laticinios.join(", ");
+    listaFormatada += "Laticínios:<br> - ";
+    listaFormatada += alimentosPorCategoria.laticinios.join("<br> - ");
     listaFormatada += "<br><br>";
-    listaFormatada += "Congelados:<br>";
-    listaFormatada += alimentosPorCategoria.congelados.join(", ");
+    listaFormatada += "Congelados:<br> - ";
+    listaFormatada += alimentosPorCategoria.congelados.join("<br> - ");
     listaFormatada += "<br><br>";
-    listaFormatada += "Doces:<br>";
-    listaFormatada += alimentosPorCategoria.doces.join(", ");
+    listaFormatada += "Doces:<br> - ";
+    listaFormatada += alimentosPorCategoria.doces.join("<br> - ");
     listaFormatada += "<br><br>";
-    listaFormatada += "Bebidas:<br>";
-    listaFormatada += alimentosPorCategoria.bebidas.join(", ");
+    listaFormatada += "Bebidas:<br> - ";
+    listaFormatada += alimentosPorCategoria.bebidas.join("<br> - ");
     return listaFormatada;
+
 }
 
 function naoRepetirAlimento() {
@@ -166,5 +178,15 @@ function naoRepetirAlimento() {
         (alimentosPorCategoria.bebidas.includes(alimento) && categoria == 'bebidas')) {
         return true;
     } 
+}
+
+function exibirListaCompra() {
+    const lista = getListaDeCompras();
+    if (lista.length > 0) {
+        const listaFormatada = lista.map(alimentosPorCategoria => formatarListaCompra(alimentosPorCategoria)).join('<br><br>');
+        listaCompra.innerHTML = listaFormatada;
+    } else {
+        listaCompra.innerHTML = "Sua lista está vazia!";
+    }
 }
 
