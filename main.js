@@ -17,6 +17,10 @@ let alimentosPorCategoria = {
     bebidas: []
 };
 
+// window.onload(() => {
+
+// });
+
 botaoAdicionar();
 botaoRemover();
 botaoLimparTudo();
